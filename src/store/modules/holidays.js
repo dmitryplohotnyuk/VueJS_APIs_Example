@@ -24,8 +24,9 @@ export default {
             let response = await serverHolidays.get(request);
             store.commit('SET_HOLIDAYS', response.data.holidays);
         },
-        SET_COUNTRY({ commit }, payload) {
-            commit('SET_COUNTRY', payload);  
+        SET_COUNTRY(store, payload) {
+            store.commit('SET_COUNTRY', payload);  
+            store.dispatch('LOAD_HOLIDAYS');
         }
     }
 }

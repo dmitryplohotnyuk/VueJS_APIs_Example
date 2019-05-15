@@ -30,11 +30,13 @@ export default {
             let response = await serverNews.get(request);
             store.commit('SET_NEWS', response.data.articles);
         },
-        SET_COUNTRY({ commit }, payload) {
-            commit('SET_COUNTRY', payload);
+        SET_COUNTRY(store, payload) {
+            store.commit('SET_COUNTRY', payload);
+            store.dispatch('LOAD_NEWS');
         },
-        SET_CATEGORY({ commit }, payload) {
-            commit('SET_CATEGORY', payload);
+        SET_CATEGORY(store, payload) {
+            store.commit('SET_CATEGORY', payload);
+            store.dispatch('LOAD_NEWS')
         }
     }
 }

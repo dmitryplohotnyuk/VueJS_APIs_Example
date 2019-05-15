@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+
 export default {
   created() {
     this.$store.dispatch("holidays/LOAD_HOLIDAYS", null, { root: true });
@@ -49,17 +51,14 @@ export default {
     };
   },
   computed: {
-    country() {
-      return this.$store.getters['holidays/country'];
-    },
-    holidays() {
-      return this.$store.getters['holidays/holidays'];
-    }
+    ...mapGetters('holidays', [
+      'country',
+      'holidays'
+    ])
   },
   methods: {
     chengeCountry(country) {
       this.$store.dispatch("holidays/SET_COUNTRY", country, { root: true });
-      this.$store.dispatch("holidays/LOAD_HOLIDAYS", null, { root: true });
     }
   }
 };

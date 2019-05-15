@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
   created() {
     this.$store.dispatch('news/LOAD_NEWS', null, { root: true });
@@ -76,24 +77,18 @@ export default {
     };
   },
   computed: {
-    category() {
-      return this.$store.getters['news/category'];
-    },
-    country() {
-      return this.$store.getters['news/country'];
-    },
-    news() {
-      return this.$store.getters['news/news'];
-    }
+    ...mapGetters('news', [
+      'country',
+      'category',
+      'news'
+    ])
   },
   methods: {
     chengeCountry(country) {
       this.$store.dispatch('news/SET_COUNTRY', country, { root: true });
-      this.$store.dispatch('news/LOAD_NEWS', null, { root: true });
     },
     chengeCategory(category) {
       this.$store.dispatch('news/SET_CATEGORY', category, { root: true });
-      this.$store.dispatch('news/LOAD_NEWS', null, { root: true });
     }
   }
 };
