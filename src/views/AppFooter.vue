@@ -2,7 +2,7 @@
   <div>
     <v-footer :fixed="true" app dark class="primary">
       <v-flex text-xs-center>
-        <span>VueJS NEWS &copy;</span>
+        <span>VueJS APIs Example &copy;</span>
       </v-flex>
     </v-footer>
   </div>

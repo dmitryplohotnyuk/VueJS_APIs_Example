@@ -1,4 +1,4 @@
-# vue-news
+# vue-apis-example
 
 ## Project setup
 ```
