@@ -1,16 +1,17 @@
 import serverHolidays from '../../plugins/holidaysApi';
 export default {
+    namespaced: true,
     state: {
-        countryHolidays: 'ua',
+        country: 'ua',
         holidays: null
     },
     getters: {
-        getCountryHolidays: (state) => state.countryHolidays,
-        getHolidays: (state) => state.holidays
+        country: (state) => state.country,
+        holidays: (state) => state.holidays
     },
     mutations: {
-        SET_COUNTRY_HOLIDAYS(state, payload) {
-            state.countryHolidays = payload;
+        SET_COUNTRY(state, payload) {
+            state.country = payload;
         },
         SET_HOLIDAYS(state, payload) {
             state.holidays = payload;
@@ -18,13 +19,13 @@ export default {
     },
     actions: {
         LOAD_HOLIDAYS: async function (store) {
-            let country = store.getters.getCountryHolidays;
+            let country = store.getters.country;
             let request = 'holidays?country=' + country;
             let response = await serverHolidays.get(request);
             store.commit('SET_HOLIDAYS', response.data.holidays);
         },
-        SET_COUNTRY_HOLIDAYS({ commit }, payload) {
-            commit('SET_COUNTRY_HOLIDAYS', payload);  
+        SET_COUNTRY({ commit }, payload) {
+            commit('SET_COUNTRY', payload);  
         }
     }
 }

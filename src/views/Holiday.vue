@@ -33,7 +33,7 @@
 <script>
 export default {
   created() {
-    this.$store.dispatch("LOAD_HOLIDAYS");
+    this.$store.dispatch("holidays/LOAD_HOLIDAYS", null, { root: true });
   },
   data() {
     return {
@@ -50,16 +50,16 @@ export default {
   },
   computed: {
     country() {
-      return this.$store.getters.getCountryHolidays;
+      return this.$store.getters['holidays/country'];
     },
     holidays() {
-      return this.$store.getters.getHolidays;
+      return this.$store.getters['holidays/holidays'];
     }
   },
   methods: {
     chengeCountry(country) {
-      this.$store.dispatch("SET_COUNTRY_HOLIDAYS", country);
-      this.$store.dispatch("LOAD_HOLIDAYS");
+      this.$store.dispatch("holidays/SET_COUNTRY", country, { root: true });
+      this.$store.dispatch("holidays/LOAD_HOLIDAYS", null, { root: true });
     }
   }
 };

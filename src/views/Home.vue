@@ -50,7 +50,7 @@
 <script>
 export default {
   created() {
-    this.$store.dispatch("LOAD_NEWS");
+    this.$store.dispatch('news/LOAD_NEWS', null, { root: true });
   },
   data() {
     return {
@@ -77,23 +77,23 @@ export default {
   },
   computed: {
     category() {
-      return this.$store.getters.getCategoryNews;
+      return this.$store.getters['news/category'];
     },
     country() {
-      return this.$store.getters.getCountryNews;
+      return this.$store.getters['news/country'];
     },
     news() {
-      return this.$store.getters.getNews;
+      return this.$store.getters['news/news'];
     }
   },
   methods: {
     chengeCountry(country) {
-      this.$store.dispatch("SET_COUNTRY_NEWS", country);
-      this.$store.dispatch("LOAD_NEWS");
+      this.$store.dispatch('news/SET_COUNTRY', country, { root: true });
+      this.$store.dispatch('news/LOAD_NEWS', null, { root: true });
     },
     chengeCategory(category) {
-      this.$store.dispatch("SET_CATEGORY_NEWS", category);
-      this.$store.dispatch("LOAD_NEWS");
+      this.$store.dispatch('news/SET_CATEGORY', category, { root: true });
+      this.$store.dispatch('news/LOAD_NEWS', null, { root: true });
     }
   }
 };
