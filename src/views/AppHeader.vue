@@ -15,6 +15,10 @@
           <v-icon v-html="'today'"></v-icon>
           Выходные
         </v-btn>
+        <v-btn flat to="/aliment">
+          <v-icon v-html="'face'"></v-icon>
+          Алименты
+        </v-btn>
         <v-btn flat to="/author">
           <v-icon v-html="'account_circle'"></v-icon>
           Автор
