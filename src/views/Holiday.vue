@@ -3,6 +3,9 @@
     <v-layout>
       <v-flex text-xs-center>
         <h3>Данные из открытого источника - holidayapi.com</h3>
+        <v-alert :value="true" type="warning" v-if="error">
+          {{error}}
+        </v-alert>
       </v-flex>
     </v-layout>
     <v-layout align-center>
@@ -53,7 +56,8 @@ export default {
   computed: {
     ...mapGetters('holidays', [
       'country',
-      'holidays'
+      'holidays',
+      'error'
     ])
   },
   methods: {

@@ -4,12 +4,14 @@ export default {
     state: {
         country: 'ua',
         category: 'sports',
-        news: null
+        news: null,
+        error: null
     },
     getters: {
         country: (state) => state.country,
         category: (state) => state.category,
-        news: (state) => state.news
+        news: (state) => state.news,
+        error: (state) => state.error
     },
     mutations: {
         SET_COUNTRY(state, payload) {
@@ -20,6 +22,12 @@ export default {
         },
         SET_NEWS(state, payload) {
             state.news = payload;
+        },
+        SET_ERROR(state, payload) {
+            state.error = payload;
+        },
+        CLEAR_ERROR(state){
+            state.error = null;
         }
     },
     actions: {
@@ -27,8 +35,14 @@ export default {
             let category = store.getters.category;
             let country = store.getters.country;
             let request = 'top-headlines?country=' + country + '&category=' + category;
-            let response = await serverNews.get(request);
-            store.commit('SET_NEWS', response.data.articles);
+            try {
+                let response = await serverNews.get(request);
+                store.commit('SET_NEWS', response.data.articles);
+                store.commit('CLEAR_ERROR');
+            }
+            catch(e) {
+                store.commit('SET_ERROR', e.message);
+            }
         },
         SET_COUNTRY(store, payload) {
             store.commit('SET_COUNTRY', payload);
